@@ -1,0 +1,12 @@
+Something has terribly gone wrong. Gathering UserInfo:
+Nick: Blizzardo1
+FingerPrint: 2014030509514867A
+Time Of incident: Wednesday March 05, 2014 :: 09:51:48
+Exception: System.ArgumentNullException: Value cannot be null.
+Parameter name: input
+   at System.Text.RegularExpressions.Regex.Match(String input)
+   at BlizzetaZero.RFC1459.IrcCommands.ParseReply(String input, String& prefix, String& command, String[]& parameters) in g:\BreakerDev Suite 2012\Blizzeta Zero rev2\Blizzeta Zero rev2\RFC1459\IrcCommands.cs:line 123
+   at BlizzetaZero.Kernel.WhoInfo.GetUser(Irc server, String nick) in g:\BreakerDev Suite 2012\Blizzeta Zero rev2\Blizzeta Zero rev2\Kernel\Whois.cs:line 86
+   at BlizzetaZero.Kernel.User.GetUser(Irc server, String nick) in g:\BreakerDev Suite 2012\Blizzeta Zero rev2\Blizzeta Zero rev2\Kernel\User.cs:line 31
+   at BlizzetaZero.Kernel.uac.getUser(String name) in g:\BreakerDev Suite 2012\Blizzeta Zero rev2\Blizzeta Zero rev2\Kernel\UserAccountControl.cs:line 68
+   at BlizzetaZero.Kernel.uac.GetPermission(String Nick, Irc s) in g:\BreakerDev Suite 2012\Blizzeta Zero rev2\Blizzeta Zero rev2\Kernel\UserAccountControl.cs:line 24

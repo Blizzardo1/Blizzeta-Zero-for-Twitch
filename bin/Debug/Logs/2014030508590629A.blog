@@ -1,0 +1,8 @@
+Something has terribly gone wrong. Gathering UserInfo:
+Nick: Blizzardo1
+FingerPrint: 2014030508590629A
+Time Of incident: Wednesday March 05, 2014 :: 08:59:06
+Exception: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at BlizzetaZero.Kernel.User..ctor(String hostmask) in g:\BreakerDev Suite 2012\Blizzeta Zero rev2\Blizzeta Zero rev2\Kernel\User.cs:line 23
+   at BlizzetaZero.Kernel.uac.getUser(String name) in g:\BreakerDev Suite 2012\Blizzeta Zero rev2\Blizzeta Zero rev2\Kernel\UserAccountControl.cs:line 66
+   at BlizzetaZero.Kernel.uac.GetPermission(String Nick, Irc s) in g:\BreakerDev Suite 2012\Blizzeta Zero rev2\Blizzeta Zero rev2\Kernel\UserAccountControl.cs:line 22

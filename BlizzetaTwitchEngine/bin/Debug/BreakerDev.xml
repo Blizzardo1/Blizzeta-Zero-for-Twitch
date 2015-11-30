@@ -1,0 +1,2237 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BreakerDev</name>
+    </assembly>
+    <members>
+        <member name="T:BreakerDev.GUI.LineBarrier">
+            <summary>
+            A  Simple Line Barrier
+            </summary>
+        </member>
+        <member name="M:BreakerDev.GUI.LineBarrier.#ctor">
+            <summary>
+            Create a new Line  Barrier
+            </summary>
+        </member>
+        <member name="M:BreakerDev.GUI.LineBarrier.OnResize(System.EventArgs)">
+            <summary>
+            Ignore OnResizeEvent
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:BreakerDev.GUI.LineBarrier.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Ignore OnPaintEvent
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="T:BreakerDev.Imports32.Imports">
+            <summary>
+            BreakerDev Imports Library
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.DF_ALLOWOTHERACCOUNTHOOK">
+            <summary>
+            Enables processes running in other accounts on the desktop to set hooks in this process.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.SW_HIDE">
+            <summary>
+            Sets Active Window to hide
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.SW_SHOWNORMAL">
+            <summary>
+            Sets Active Window to show
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.SW_SHOWMINIMIZED">
+            <summary>
+            Sets Active Window to minimize
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.SW_SHOWMAXIMIZED">
+            <summary>
+            Sets Active Window to maximize
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.WS_VISIBLE">
+            <summary>
+            Visible
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.WS_BORDER">
+            <summary>
+            Border
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.TARGETWINDOW">
+            <summary>
+            Target Window
+            </summary>
+        </member>
+        <member name="T:BreakerDev.Imports32.Imports.AdvApi32">
+            <summary>
+            AdvApi32.dll Imports
+            </summary>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.AdvApi32.AbortSystemShutdown(System.String)">
+            <summary>
+            Stops a system shutdown that has been initiated.
+            </summary>
+            <param name="lpMachineName">The network name of the computer where the shutdown is to be stopped. If lpMachineName is NULL or an empty string, the function stops the shutdown on the local computer.</param>
+            <returns>If the function succeeds, the return value is nonzero.</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.AdvApi32.InitiateSystemShutdown(System.String,System.String,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Initiates a shutdown and optional restart of the specified computer.
+            </summary>
+            <param name="lpMachinename">The network name of the computer to be shut down. If lpMachineName is NULL or an empty string, the function shuts down the local computer.</param>
+            <param name="lpMessage">The message to be displayed in the shutdown dialog box. This parameter can be NULL if no message is required.</param>
+            <param name="dwTimeout">The length of time that the shutdown dialog box should be displayed, in seconds. While this dialog box is displayed, the shutdown can be stopped by the AbortSystemShutdown function.
+            If dwTimeout is not zero, InitiateSystemShutdown displays a dialog box on the specified computer. The dialog box displays the name of the user who called the function, displays the message specified by the lpMessage parameter, and prompts the user to log off. The dialog box beeps when it is created and remains on top of other windows in the system. The dialog box can be moved but not closed. A timer counts down the remaining time before a forced shutdown.</param>
+            <param name="bForceAppsClosed">If this parameter is TRUE, applications with unsaved changes are to be forcibly closed. Note that this can result in data loss.
+            If this parameter is FALSE, the system displays a dialog box instructing the user to close the applications.</param>
+            <param name="bRebootAfterShutdown">If this parameter is TRUE, the computer is to restart immediately after shutting down. If this parameter is FALSE, the system flushes all caches to disk and safely powers down the system.</param>
+            <returns>If the function succeeds, the return value is nonzero.</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.AdvApi32.InitiateSystemShutdownEx(System.String,System.String,System.UInt32,System.Boolean,System.Boolean,BreakerDev.Imports32.ShutdownReason)">
+            <summary>
+            Initiates a shutdown and optional restart of the specified computer, and optionally records the reason for the shutdown.
+            </summary>
+            <param name="lpMachineName">The network name of the computer to be shut down. If lpMachineName is NULL or an empty string, the function shuts down the local computer.</param>
+            <param name="lpMessage">The message to be displayed in the shutdown dialog box. This parameter can be NULL if no message is required.</param>
+            <param name="dwTimeout">The length of time that the shutdown dialog box should be displayed, in seconds. While this dialog box is displayed, shutdown can be stopped by the AbortSystemShutdown function.
+            If dwTimeout is not zero, InitiateSystemShutdownEx displays a dialog box on the specified computer. The dialog box displays the name of the user who called the function, displays the message specified by the lpMessage parameter, and prompts the user to log off. The dialog box beeps when it is created and remains on top of other windows in the system. The dialog box can be moved but not closed. A timer counts down the remaining time before shutdown.
+            If dwTimeout is zero, the computer shuts down without displaying the dialog box, and the shutdown cannot be stopped by AbortSystemShutdown.</param>
+            <param name="bForceAppsClosed">If this parameter is TRUE, applications with unsaved changes are to be forcibly closed. If this parameter is FALSE, the system displays a dialog box instructing the user to close the applications.</param>
+            <param name="bRebootAfterShutdown">If this parameter is TRUE, the computer is to restart immediately after shutting down. If this parameter is FALSE, the system flushes all caches to disk and safely powers down the system.</param>
+            <param name="dwReason">The reason for initiating the shutdown. This parameter must be one of the system shutdown reason codes.
+            If this parameter is zero, the default is an undefined shutdown that is logged as "No title for this reason could be found". By default, it is also an unplanned shutdown. Depending on how the system is configured, an unplanned shutdown triggers the creation of a file that contains the system state information, which can delay shutdown. Therefore, do not use zero for this parameter.</param>
+            <returns>If the function succeeds, the return value is nonzero.</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.AdvApi32.LogonUser(System.String,System.String,System.String,BreakerDev.Imports32.Imports.AdvApi32.LOGON_TYPE,BreakerDev.Imports32.Imports.AdvApi32.LOGON_PROVIDER,System.IntPtr@)">
+            <summary>
+            The LogonUser function attempts to log a user on to the local computer. The local computer is the computer from which LogonUser  was called. You cannot use LogonUser to log on to a remote computer.
+            </summary>
+            <param name="lpszUsername">The Username to login with</param>
+            <param name="lpszDomain">The name of the Domain</param>
+            <param name="lpszPassword">The User's Password</param>
+            <param name="dwLogonType">Logon Type</param>
+            <param name="dwLogonProvider">The Provider of the Logon</param>
+            <param name="phToken">The User's New Authentication Token</param>
+            <returns>Returns True if Successful Login</returns>
+        </member>
+        <member name="T:BreakerDev.Imports32.Imports.AdvApi32.LOGON_PROVIDER">
+            <summary>
+            Logon Providers
+            </summary>
+        </member>
+        <member name="T:BreakerDev.Imports32.Imports.AdvApi32.LOGON_TYPE">
+            <summary>
+            Logon Types
+            </summary>
+        </member>
+        <member name="T:BreakerDev.Imports32.Imports.CoreDll">
+            <summary>
+            CoreDll Imports
+            </summary>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.CoreDll.CheckPassword(System.String)">
+            <summary>
+            Checks to see if the Password of the local account matches
+            </summary>
+            <param name="password">The password to check</param>
+            <returns>Value is TRUE if Password is matched</returns>
+        </member>
+        <member name="T:BreakerDev.Imports32.Imports.GDI32">
+            <summary>
+            GDI32.dll Imports
+            </summary>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.GDI32.BitBlt(System.IntPtr,System.Int32,System.Int32,System.Int32,System.Int32,System.IntPtr,System.Int32,System.Int32,BreakerDev.Imports32.Imports.GDI32.TernaryRasterOperations)">
+            <summary>
+               Performs a bit-block transfer of the color data corresponding to a
+               rectangle of pixels from the specified source device context into
+               a destination device context.
+            </summary>
+            <param name="hdc">Handle to the destination device context.</param>
+            <param name="nXDest">The leftmost x-coordinate of the destination rectangle (in pixels).</param>
+            <param name="nYDest">The topmost y-coordinate of the destination rectangle (in pixels).</param>
+            <param name="nWidth">The width of the source and destination rectangles (in pixels).</param>
+            <param name="nHeight">The height of the source and the destination rectangles (in pixels).</param>
+            <param name="hdcSrc">Handle to the source device context.</param>
+            <param name="nXSrc">The leftmost x-coordinate of the source rectangle (in pixels).</param>
+            <param name="nYSrc">The topmost y-coordinate of the source rectangle (in pixels).</param>
+            <param name="dwRop">A raster-operation code.</param>
+            <returns>
+               <c>true</c> if the operation succeeded, <c>false</c> otherwise.
+            </returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.GDI32.CreateCompatibleBitmap(System.IntPtr,System.Int32,System.Int32)">
+            <summary>
+            The CreateCompatibleBitmap function creates a bitmap compatible with the device that is associated with the specified device context.
+            </summary>
+            <param name="hdc">A handle to a device context.</param>
+            <param name="nWidth">The bitmap width, in pixels.</param>
+            <param name="nHeight">The bitmap height, in pixels.</param>
+            <returns>If the function succeeds, the return value is a handle to the compatible bitmap (DDB).</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.GDI32.CreateCompatibleDC(System.IntPtr)">
+            <summary>
+            The CreateCompatibleDC function creates a memory device context (DC) compatible with the specified device.
+            </summary>
+            <param name="hdc">A handle to an existing DC. If this handle is NULL, the function creates a memory DC compatible with the application's current screen.</param>
+            <returns>If the function succeeds, the return value is the handle to a memory DC.</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.GDI32.SelectObject(System.IntPtr,System.IntPtr)">
+            <summary>
+            The SelectObject function selects an object into the specified device context (DC). The new object replaces the previous object of the same type.
+            </summary>
+            <param name="hdc">A handle to the DC.</param>
+            <param name="hgdiobj">A handle to the object to be selected. The specified object must have been created by using one of the following functions.</param>
+            <returns>If the selected object is not a region and the function succeeds, the return value is a handle to the object being replaced. If the selected object is a region and the function succeeds, the return value is one of the following values.</returns>
+            <remarks>This function returns the previously selected object of the specified type. An application should always replace a new object with the original, default object after it has finished drawing with the new object. An application cannot select a single bitmap into more than one DC at a time. ICM: If the object being selected is a brush or a pen, color management is performed.</remarks>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.GDI32.DeleteDC(System.IntPtr)">
+            <summary>
+            The DeleteDC function deletes the specified device context (DC).
+            </summary>
+            <param name="hdc">A handle to the device context.</param>
+            <returns>If the function succeeds, the return value is nonzero.</returns>
+            <remarks>An application must not delete a DC whose handle was obtained by calling the GetDC function. Instead, it must call the ReleaseDC function to free the DC.</remarks>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.GDI32.DeleteObject(System.IntPtr)">
+            <summary>
+            The DeleteObject function deletes a logical pen, brush, font, bitmap, region, or palette, freeing all system resources associated with the object. After the object is deleted, the specified handle is no longer valid.
+            </summary>
+            <param name="hObject">A handle to a logical pen, brush, font, bitmap, region, or palette.</param>
+            <returns>A handle to a logical pen, brush, font, bitmap, region, or palette.</returns>
+            <remarks>Do not delete a drawing object (pen or brush) while it is still selected into a DC. When a pattern brush is deleted, the bitmap associated with the brush is not deleted. The bitmap must be deleted independently.</remarks>
+        </member>
+        <member name="T:BreakerDev.Imports32.Imports.GDI32.TernaryRasterOperations">
+            <summary>
+                Specifies a raster-operation code. These codes define how the color data for the
+                source rectangle is to be combined with the color data for the destination
+                rectangle to achieve the final color.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.GDI32.TernaryRasterOperations.SRCCOPY">
+            <summary>dest = source</summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.GDI32.TernaryRasterOperations.SRCPAINT">
+            <summary>dest = source OR dest</summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.GDI32.TernaryRasterOperations.SRCAND">
+            <summary>dest = source AND dest</summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.GDI32.TernaryRasterOperations.SRCINVERT">
+            <summary>dest = source XOR dest</summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.GDI32.TernaryRasterOperations.SRCERASE">
+            <summary>dest = source AND (NOT dest)</summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.GDI32.TernaryRasterOperations.NOTSRCCOPY">
+            <summary>dest = (NOT source)</summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.GDI32.TernaryRasterOperations.NOTSRCERASE">
+            <summary>dest = (NOT src) AND (NOT dest)</summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.GDI32.TernaryRasterOperations.MERGECOPY">
+            <summary>dest = (source AND pattern)</summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.GDI32.TernaryRasterOperations.MERGEPAINT">
+            <summary>dest = (NOT source) OR dest</summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.GDI32.TernaryRasterOperations.PATCOPY">
+            <summary>dest = pattern</summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.GDI32.TernaryRasterOperations.PATPAINT">
+            <summary>dest = DPSnoo</summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.GDI32.TernaryRasterOperations.PATINVERT">
+            <summary>dest = pattern XOR dest</summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.GDI32.TernaryRasterOperations.DSTINVERT">
+            <summary>dest = (NOT dest)</summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.GDI32.TernaryRasterOperations.BLACKNESS">
+            <summary>dest = BLACK</summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.GDI32.TernaryRasterOperations.WHITENESS">
+            <summary>dest = WHITE</summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.GDI32.TernaryRasterOperations.CAPTUREBLT">
+            <summary>
+            Capture window as seen on screen.  This includes layered windows 
+            such as WPF windows with AllowsTransparency="true"
+            </summary>
+        </member>
+        <member name="T:BreakerDev.Imports32.Imports.EnumWindowsCallback">
+            <summary>
+            The Callback that Enumerates all top-level windows on the screen by passing the handle to each window. 
+            </summary>
+            <param name="hwnd">A pointer to an application-defined callback function.</param>
+            <param name="lParam">An application-defined value to be passed to the callback function. </param>
+            <returns>If the function succeeds, the return value is nonzero.</returns>
+        </member>
+        <member name="T:BreakerDev.Imports32.Imports.EnumDesktopsDelegate">
+            <summary>
+            The Callback that Enumerates all desktops in a given Workstation.
+            </summary>
+            <param name="desktop">Desktop</param>
+            <param name="lParam">An application-defined value to be passed to the callback function.</param>
+            <returns>If the function succeeds, the return value is nonzero.</returns>
+        </member>
+        <member name="T:BreakerDev.Imports32.Imports.FLASHWINFO">
+            <summary>
+            Flash Window Info for FlashWindowEx
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.FLASHWINFO.cbSize">
+            <summary>
+            The size of the structure, in bytes.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.FLASHWINFO.hwnd">
+            <summary>
+            A handle to the window to be flashed. The window can be either opened or minimized.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.FLASHWINFO.dwFlags">
+            <summary>
+            The flash status. This parameter can be one or more of the following values.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.FLASHWINFO.uCount">
+            <summary>
+            The number of times to flash the window.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.FLASHWINFO.dwTimeout">
+            <summary>
+            The rate at which the window is to be flashed, in milliseconds. If dwTimeout is zero, the function uses the default cursor blink rate.
+            </summary>
+        </member>
+        <member name="T:BreakerDev.Imports32.Imports.SECURITY_ATTRIBUTES">
+            <summary>
+            Contains the security descriptor for an object and specifies whether the handle retrieved by specifying this structure is inheritable
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.SECURITY_ATTRIBUTES.nLength">
+            <summary>
+            The size, in bytes, of this structure. Set this value to the size of the SECURITY_ATTRIBUTES structure.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.SECURITY_ATTRIBUTES.lpSecurityDescriptor">
+            <summary>
+            A pointer to a SECURITY_DESCRIPTOR structure that controls access to the object. If the value of this member is NULL, the object is assigned the default security descriptor associated with the access token of the calling process. This is not the same as granting access to everyone by assigning a NULL discretionary access control list (DACL). By default, the default DACL in the access token of a process allows access only to the user represented by the access token.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.SECURITY_ATTRIBUTES.bInheritHandle">
+            <summary>
+            A Boolean value that specifies whether the returned handle is inherited when a new process is created. If this member is TRUE, the new process inherits the handle.
+            </summary>
+        </member>
+        <member name="T:BreakerDev.Imports32.Imports.Kernel32">
+            <summary>
+            Kernel32.dll Imports
+            </summary>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.Kernel32.GetLastError">
+            <summary>
+            Gets the last error Windows has thrown
+            </summary>
+            <returns>Last Error known to Windows during the current session</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.Kernel32.GetLastWin32Error">
+            <summary>
+            Gets the last error Windows has thrown
+            </summary>
+            <returns>Last Error known to Windows during the current session</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.Kernel32.OpenConsole">
+            <summary>
+            Allocates a new console for the calling process.
+            </summary>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.Kernel32.CloseConsole">
+            <summary>
+            Detaches the calling process from its console.
+            </summary>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.Kernel32.Quit(System.UInt32)">
+            <summary>
+            Ends the calling process and all its threads.
+            </summary>
+            <param name="ExitCode">The exit code for the process and all threads.</param>
+        </member>
+        <member name="T:BreakerDev.Imports32.Imports.Shell32">
+            <summary>
+            Shell32.dll Imports
+            </summary>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.Shell32.IsUserAnAdmin">
+             <summary>
+             Tests whether the current user is a member of the Administrator's group.
+             </summary>
+             <returns>Returns TRUE if the user is a member of the Administrator's group; otherwise, FALSE.</returns>
+             <remarks>
+             This function is a wrapper for CheckTokenMembership.
+             It is recommended to call that function directly to determine Administrator group status rather than calling IsUserAnAdmin.
+            ' </remarks>
+        </member>
+        <member name="T:BreakerDev.Imports32.Imports.User32">
+            <summary>
+            User32.dll Imports
+            </summary>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.CreateDesktop(System.String,System.String,System.String,System.Int32,BreakerDev.Imports32.ACCESS_MASK,BreakerDev.Imports32.Imports.SECURITY_ATTRIBUTES@)">
+            <summary>
+            Creates a new desktop, associates it with the current window station of the calling process, and assigns it to the calling thread. The calling process must have an associated window station, either assigned by the system at process creation time or set by the SetProcessWindowStation function.
+            </summary>
+            <param name="desktopName">The name of the desktop to be created. Desktop names are case-insensitive and may not contain backslash characters (\).</param>
+            <param name="device">Reserved; must be NULL.</param>
+            <param name="deviceMode">Reserved; must be NULL.</param>
+            <param name="flags">This parameter can be zero or set as DF_ALLOWOTHERACCOUNTHOOK</param>
+            <param name="accessMask">The access to the desktop.</param>
+            <param name="attributes">A pointer to a SECURITY_ATTRIBUTES structure that determines whether the returned handle can be inherited by child processes. If lpsa is NULL, the handle cannot be inherited</param>
+            <returns>If the function succeeds, the return value is a handle to the newly created desktop. If the specified desktop already exists, the function succeeds and returns a handle to the existing desktop. When you are finished using the handle, call the CloseDesktop function to close it.
+            If the function fails, the return value is NULL.</returns>
+            <remarks>If the dwDesiredAccess parameter specifies the READ_CONTROL, WRITE_DAC, or WRITE_OWNER standard access rights, you must also request the DESKTOP_READOBJECTS and DESKTOP_WRITEOBJECTS access rights.
+            The number of desktops that can be created is limited by the size of the system desktop heap, which is 48 MB. Desktop objects use the heap to store resources. You can increase the number of desktops that can be created by reducing the default heap reserved for each desktop in the interactive window station. This value is specified in the SharedSection substring of the following registry value: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\SubSystems\Windows. The default data for this registry value is as follows:
+            %SystemRoot%\system32\csrss.exe ObjectDirectory=\Windows SharedSection=1024,3072,512 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=winsrv:ConServerDllInitialization,2 ProfileControl=Off MaxRequestThreads=16
+            The values for the SharedSection substring are described as follows:
+            The first SharedSection value is the size of the shared heap common to all desktops, in kilobytes.
+            The second SharedSection value is the size of the desktop heap needed for each desktop that is created in the interactive window station, WinSta0, in kilobytes.
+            The third SharedSection value is the size of the desktop heap needed for each desktop that is created in a noninteractive window station, in kilobytes.</remarks>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.CloseDesktop(System.IntPtr)">
+            <summary>
+            Closes an open handle to a desktop object.
+            </summary>
+            <param name="hDesktop">A handle to the desktop to be closed. This can be a handle returned by the CreateDesktop, OpenDesktop, or OpenInputDesktop functions. Do not specify the handle returned by the GetThreadDesktop function.</param>
+            <returns>If the function succeeds, the return value is nonzero.
+            If the function fails, the return value is zero. </returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.OpenDesktop(System.String,System.UInt32,System.Boolean,System.UInt32)">
+            <summary>
+            Opens the specified desktop object.
+            </summary>
+            <param name="lpszDesktop">The name of the desktop to be opened. Desktop names are case-insensitive.
+            This desktop must belong to the current window station.</param>
+            <param name="dwFlags">This parameter can be zero or DF_ALLOWOTHERACCOUNTHOOK</param>
+            <param name="fInherit">If this value is TRUE, processes created by this process will inherit the handle. Otherwise, the processes do not inherit this handle.</param>
+            <param name="dwDesiredAccess">The access to the desktop. For a list of access rights, see Desktop Security and Access Rights.</param>
+            <returns>If the function succeeds, the return value is a handle to the opened desktop. When you are finished using the handle, call the CloseDesktop function to close it.
+            If the function fails, the return value is NULL.</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.EnumDesktops(System.IntPtr,BreakerDev.Imports32.Imports.EnumDesktopsDelegate,System.IntPtr)">
+            <summary>
+            numerates all desktops associated with the specified window station of the calling process. The function passes the name of each desktop, in turn, to an application-defined callback function.
+            </summary>
+            <param name="hwinsta">A handle to the window station whose desktops are to be enumerated. This handle is returned by the CreateWindowStation, GetProcessWindowStation, or OpenWindowStation function, and must have the WINSTA_ENUMDESKTOPS access right. For more information, see Window Station Security and Access Rights.
+            If this parameter is NULL, the current window station is used.</param>
+            <param name="lpEnumFunc">A pointer to an application-defined EnumDesktopProc callback function.</param>
+            <param name="lParam">An application-defined value to be passed to the callback function.</param>
+            <returns>If the function succeeds, it returns the nonzero value returned by the callback function that was pointed to by lpEnumFunc.
+            If the function is unable to perform the enumeration, the return value is zero.
+            If the callback function fails, the return value is zero</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.SwitchDesktop(System.IntPtr)">
+            <summary>
+            Makes the specified desktop visible and activates it. This enables the desktop to receive input from the user. The calling process must have DESKTOP_SWITCHDESKTOP access to the desktop for the SwitchDesktop function to succeed.
+            </summary>
+            <param name="hDesktop">A handle to the desktop. This handle is returned by the CreateDesktop and OpenDesktop functions.
+            This desktop must be associated with the current window station for the process.</param>
+            <returns>If the function succeeds, the return value is nonzero.</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.SendMessage(System.IntPtr,System.UInt32,System.IntPtr,System.IntPtr)">
+            <summary>
+            Sends the specified message to a window or windows. The SendMessage function calls the window procedure for the specified window and does not return until the window procedure has processed the message.
+            </summary>
+            <param name="hWnd">A handle to the window whose window procedure will receive the message. If this parameter is HWND_BROADCAST ((HWND)0xffff), the message is sent to all top-level windows in the system, including disabled or invisible unowned windows, overlapped windows, and pop-up windows; but the message is not sent to child windows.</param>
+            <param name="Msg">The message to be sent.</param>
+            <param name="wParam">Additional message-specific information.</param>
+            <param name="lParam">Additional message-specific information.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.SendMessage(System.IntPtr,System.UInt32,System.IntPtr,System.String)">
+            <summary>
+            Sends the specified message to a window or windows. The SendMessage function calls the window procedure for the specified window and does not return until the window procedure has processed the message.
+            </summary>
+            <param name="hWnd">A handle to the window whose window procedure will receive the message. If this parameter is HWND_BROADCAST ((HWND)0xffff), the message is sent to all top-level windows in the system, including disabled or invisible unowned windows, overlapped windows, and pop-up windows; but the message is not sent to child windows.</param>
+            <param name="Msg">The message to be sent.</param>
+            <param name="wParam">Additional message-specific information.</param>
+            <param name="lParam">Additional message-specific information.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.ShowWindowAsync(System.IntPtr,System.Int32)">
+            <summary>
+            Sets the show state of a window created by a different thread. 
+            </summary>
+            <param name="hWnd">A handle to the window. </param>
+            <param name="nCmdShow">Controls how the window is to be shown.</param>
+            <returns>If the window was previously visible, the return value is nonzero.</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.LockWorkStation">
+            <summary>
+            Locks the workstation's display. Locking a workstation protects it from unauthorized use.
+            </summary>
+            <returns>
+            If the function succeeds, the return value is nonzero.
+            Because the function executes asynchronously, a nonzero return value indicates that the operation has been initiated.
+            It does not indicate whether the workstation has been successfully locked.
+            </returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.FindWindow(System.String,System.String)">
+            <summary>
+            Retrieves a handle to the top-level window whose class name and window name match the specified strings. This function does not search child windows. This function does not perform a case-sensitive search.
+            </summary>
+            <param name="lpClassName">The class name or a class atom created by a previous call to the RegisterClass or RegisterClassEx function. The atom must be in the low-order word of lpClassName; the high-order word must be zero. If lpClassName is NULL, it finds any window whose title matches the lpWindowName parameter.</param>
+            <param name="lpWindowName">The window name (the window's title). If this parameter is NULL, all window names match. </param>
+            <returns>If the function succeeds, the return value is a handle to the window that has the specified class name and window name.</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.FlashWindow(System.IntPtr,System.Boolean)">
+            <summary>
+            Flashes the specified window one time. It does not change the active state of the window.
+            </summary>
+            <param name="hwnd">A handle to the window to be flashed. The window can be either open or minimized.</param>
+            <param name="bInvert">If this parameter is TRUE, the window is flashed from one state to the other. If it is FALSE, the window is returned to its original state (either active or inactive).</param>
+            <returns>The return value specifies the window's state before the call to the FlashWindow function. If the window caption was drawn as active before the call, the return value is nonzero. Otherwise, the return value is zero.</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.FindWindowEx(System.IntPtr,System.IntPtr,System.String,System.String)">
+            <summary>
+            Retrieves a handle to a window whose class name and window name match the specified strings. The function searches child windows, beginning with the one following the specified child window. This function does not perform a case-sensitive search. 
+            </summary>
+            <param name="hwndParent">A handle to the parent window whose child windows are to be searched.
+            If hwndParent is NULL, the function uses the desktop window as the parent window. The function searches among windows that are child windows of the desktop.
+            If hwndParent is HWND_MESSAGE, the function searches all message-only windows. </param>
+            <param name="hwndChildAfter">A handle to a child window. The search begins with the next child window in the Z order. The child window must be a direct child window of hwndParent, not just a descendant window.
+            If hwndChildAfter is NULL, the search begins with the first child window of hwndParent.
+            Note that if both hwndParent and hwndChildAfter are NULL, the function searches all top-level and message-only windows. </param>
+            <param name="lpszClass">The class name or a class atom created by a previous call to the RegisterClass or RegisterClassEx function. The atom must be placed in the low-order word of lpszClass; the high-order word must be zero.
+            If lpszClass is a string, it specifies the window class name. The class name can be any name registered with RegisterClass or RegisterClassEx, or any of the predefined control-class names, or it can be MAKEINTATOM(0x8000). In this latter case, 0x8000 is the atom for a menu class. For more information, see the Remarks section of this topic.</param>
+            <param name="lpszWindow">The window name (the window's title). If this parameter is NULL, all window names match. </param>
+            <returns>If the function succeeds, the return value is a handle to the window that has the specified class and window names.</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.FlashWindowEx(BreakerDev.Imports32.Imports.FLASHWINFO@)">
+            <summary>
+            Flashes the specified window. It does not change the active state of the window.
+            </summary>
+            <param name="pwfi">A pointer to a FLASHWINFO structure.</param>
+            <returns>The return value specifies the window's state before the call to the FlashWindowEx function. If the window caption was drawn as active before the call, the return value is nonzero. Otherwise, the return value is zero.</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.GetDesktopWindow">
+            <summary>
+            Retrieves a handle to the desktop window. The desktop window covers the entire screen. The desktop window is the area on top of which other windows are painted. 
+            </summary>
+            <returns>The return value is a handle to the desktop window.</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.GetWindowText(System.IntPtr,System.Text.StringBuilder,System.Int32)">
+            <summary>
+            Copies the text of the specified window's title bar (if it has one) into a buffer. If the specified window is a control, the text of the control is copied. However, GetWindowText cannot retrieve the text of a control in another application.
+            </summary>
+            <param name="hWnd">A handle to the window or control containing the text. </param>
+            <param name="lpString">The buffer that will receive the text. If the string is as long or longer than the buffer, the string is truncated and terminated with a null character. </param>
+            <param name="nMaxCount">The maximum number of characters to copy to the buffer, including the null character. If the text exceeds this limit, it is truncated. </param>
+            <returns>If the function succeeds, the return value is the length, in characters, of the copied string, not including the terminating null character. If the window has no title bar or text, if the title bar is empty, or if the window or control handle is invalid, the return value is zero. To get extended error information, call GetLastError. This function cannot retrieve the text of an edit control in another application.</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.GetWindowText(System.IntPtr,System.String,System.Int32)">
+            <summary>
+            Copies the text of the specified window's title bar (if it has one) into a buffer. If the specified window is a control, the text of the control is copied. However, GetWindowText cannot retrieve the text of a control in another application.
+            </summary>
+            <param name="hWnd">A handle to the window or control containing the text. </param>
+            <param name="lpString">The buffer that will receive the text. If the string is as long or longer than the buffer, the string is truncated and terminated with a null character. </param>
+            <param name="nMaxCount">The maximum number of characters to copy to the buffer, including the null character. If the text exceeds this limit, it is truncated. </param>
+            <returns>If the function succeeds, the return value is the length, in characters, of the copied string, not including the terminating null character. If the window has no title bar or text, if the title bar is empty, or if the window or control handle is invalid, the return value is zero. To get extended error information, call GetLastError. This function cannot retrieve the text of an edit control in another application.</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.GetWindowDC(System.IntPtr)">
+            <summary>
+            The GetWindowDC function retrieves the device context (DC) for the entire window, including title bar, menus, and scroll bars. A window device context permits painting anywhere in a window, because the origin of the device context is the upper-left corner of the window instead of the client area.
+            </summary>
+            <param name="hWnd">A handle to the window with a device context that is to be retrieved. If this value is NULL, GetWindowDC retrieves the device context for the entire screen.</param>
+            <returns>If the function succeeds, the return value is a handle to a device context for the specified window.</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.ReleaseDC(System.IntPtr,System.IntPtr)">
+            <summary>
+            The ReleaseDC function releases a device context (DC), freeing it for use by other applications. The effect of the ReleaseDC function depends on the type of DC. It frees only common and window DCs. It has no effect on class or private DCs.
+            </summary>
+            <param name="hWnd">A handle to the window whose DC is to be released.</param>
+            <param name="hDC">A handle to the window whose DC is to be released.</param>
+            <returns>The return value indicates whether the DC was released. If the DC was released, the return value is 1. If the DC was not released, the return value is zero.</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.GetWindowRect(System.IntPtr,BreakerDev.DwmApi.Dwm.RECT@)">
+            <summary>
+            Retrieves the dimensions of the bounding rectangle of the specified window. The dimensions are given in screen coordinates that are relative to the upper-left corner of the screen.
+            </summary>
+            <param name="hwnd">A handle to the window. </param>
+            <param name="lpRect">A pointer to a RECT structure that receives the screen coordinates of the upper-left and lower-right corners of the window.</param>
+            <returns>If the function succeeds, the return value is nonzero.</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.EnumWindows(BreakerDev.Imports32.Imports.EnumWindowsCallback,System.Int32)">
+            <summary>
+            Enumerates all top-level windows on the screen by passing the handle to each window, in turn, to an application-defined callback function. EnumWindows continues until the last top-level window is enumerated or the callback function returns FALSE. 
+            </summary>
+            <param name="lpEnumFunc">A pointer to an application-defined callback function. For more information, see EnumWindowsProc.</param>
+            <param name="lParam">An application-defined value to be passed to the callback function. </param>
+            <returns>If the function succeeds, the return value is nonzero.</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.GetWindowLongA(System.IntPtr,BreakerDev.Imports32.WindowMemoryIndex)">
+            <summary>
+            Retrieves information about the specified window. The function also retrieves the 32-bit (DWORD) value at the specified offset into the extra window memory. 
+            </summary>
+            <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs. </param>
+            <param name="nIndex">The zero-based offset to the value to be retrieved. Valid values are in the range zero through the number of bytes of extra window memory, minus four; for example, if you specified 12 or more bytes of extra memory, a value of 8 would be an index to the third 32-bit integer. To retrieve any other value, specify one of the following values.</param>
+            <returns>If the function succeeds, the return value is the requested value.</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.GetForegroundWindow">
+            <summary>
+            Retrieves a handle to the foreground window (the window with which the user is currently working). The system assigns a slightly higher priority to the thread that creates the foreground window than it does to other threads. 
+            </summary>
+            <returns>The return value is a handle to the foreground window. The foreground window can be NULL in certain circumstances, such as when a window is losing activation. </returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.SetForegroundWindow(System.IntPtr)">
+            <summary>
+            Brings the thread that created the specified window into the foreground and activates the window. Keyboard input is directed to the window, and various visual cues are changed for the user. The system assigns a slightly higher priority to the thread that created the foreground window than it does to other threads. 
+            </summary>
+            <param name="hWnd">A handle to the window that should be activated and brought to the foreground. </param>
+            <returns>If the window was brought to the foreground, the return value is nonzero. </returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Imports.User32.DisplayMessage(System.IntPtr,System.String,System.String,BreakerDev.Imports32.Imports.User32.MessageBoxOptions)">
+            <summary>
+            Displays a modal dialog box that contains a system icon, a set of buttons, and a brief application-specific message, such as status or error information. The message box returns an integer value that indicates which button the user clicked.
+            </summary>
+            <param name="Parent">A handle to the owner window of the message box to be created. If this parameter is NULL, the message box has no owner window.</param>
+            <param name="Caption">The message to be displayed. If the string consists of more than one line, you can separate the lines using a carriage return and/or linefeed character between each line.</param>
+            <param name="Title">The dialog box title. If this parameter is NULL, the default title is Error.</param>
+            <param name="Options">The contents and behavior of the dialog box. This parameter can be a combination of flags from the following groups of flags. <see cref="T:BreakerDev.Imports32.Imports.User32.MessageBoxOptions"/></param>
+            <returns>If the function succeeds, the return value is one of the following Flags, <see cref="T:BreakerDev.Imports32.Imports.User32.MessageBoxResult"/></returns>
+        </member>
+        <member name="T:BreakerDev.Imports32.Imports.User32.MessageBoxOptions">
+            <summary>
+            Flags that define appearance and behaviour of a standard message box displayed by a call to the MessageBox function.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.Ok">
+            <summary>
+            OK Button
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.OkCancel">
+            <summary>
+            OK and Cancel Buttons
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.AbortRetryIgnore">
+            <summary>
+            Abort, Retry, and Ignore Buttons
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.YesNoCancel">
+            <summary>
+            Yes, No, and Cancel Buttons
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.YesNo">
+            <summary>
+            Yes and No Buttons
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.RetryCancel">
+            <summary>
+            Retry and Cancel Buttons
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.CancelTryContinue">
+            <summary>
+            Cancel, Try, and Continue Buttons
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.IconHand">
+            <summary>
+            STOP
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.IconQuestion">
+            <summary>
+            Question
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.IconExclamation">
+            <summary>
+            Exclamation
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.IconAsterisk">
+            <summary>
+            Information
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.UserIcon">
+            <summary>
+            User Defined
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.IconWarning">
+            <summary>
+            Warning
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.IconError">
+            <summary>
+            Error
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.IconInformation">
+            <summary>
+            Information
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.IconStop">
+            <summary>
+            STOP
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.DefButton1">
+            <summary>
+            Default Button 1
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.DefButton2">
+            <summary>
+            Default Button 2
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.DefButton3">
+            <summary>
+            Default Button 3
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.DefButton4">
+            <summary>
+            Default Button 4
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.ApplicationModal">
+            <summary>
+            Application Modal Dialog
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.SystemModal">
+            <summary>
+            System Modal Dialog
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.TaskModal">
+            <summary>
+            Task Modal Dialog
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.Help">
+            <summary>
+            Help Button
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.NoFocus">
+            <summary>
+            No Focus
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.SetForeground">
+            <summary>
+            Set Forefround
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.DefaultDesktopOnly">
+            <summary>
+            Default Desktop Only
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.Topmost">
+            <summary>
+            Topmost Dialog
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.Right">
+            <summary>
+            Right Hand side
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxOptions.RTLReading">
+            <summary>
+            Right to Left Reading
+            </summary>
+        </member>
+        <member name="T:BreakerDev.Imports32.Imports.User32.MessageBoxResult">
+            <summary>
+            Represents possible values returned by the MessageBox function.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxResult.Ok">
+            <summary>
+            Returns OK
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxResult.Cancel">
+            <summary>
+            Returns Cancel
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxResult.Abort">
+            <summary>
+            Returns Abort
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxResult.Retry">
+            <summary>
+            Returns Retry
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxResult.Ignore">
+            <summary>
+            Returns Ignore
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxResult.Yes">
+            <summary>
+            Returns Yes
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxResult.No">
+            <summary>
+            Returns No
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxResult.Close">
+            <summary>
+            Returns Close
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxResult.Help">
+            <summary>
+            Returns Help
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxResult.TryAgain">
+            <summary>
+            Returns Try Again
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxResult.Continue">
+            <summary>
+            Returns Continue
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.Imports.User32.MessageBoxResult.Timeout">
+            <summary>
+            The Timeout in Milliseconds. Default is 32,000
+            </summary>
+        </member>
+        <member name="M:BreakerDev.DwmApi.Dwm.DwmEnableBlurBehindWindow(System.IntPtr,BreakerDev.DwmApi.Dwm.DWM_BLURBEHIND)">
+            <summary>
+            Enables the blur effect on a specified window.
+            </summary>
+            <param name="hWnd">The handle to the window on which the blur behind data is applied.</param>
+            <param name="pBlurBehind">A pointer to a DWM_BLURBEHIND structure that provides blur behind data.</param>
+            <remarks>
+            Enabling blur by setting the fEnable member of the DWM_BLURBEHIND structure to TRUE. This results in subsequent compositions of the window blurring the content behind it. This function should be called immediately before a BeginPaint call to ensure prompt application of the effect.
+            The alpha values in the window are honored and the rendering atop the blur will use these alpha values. It is the application's responsibility to ensure that the alpha values of all pixels in the window are correct. Some Windows Graphics Device Interface (GDI) operations do not preserve alpha values, so care must be taken when presenting child windows because the alpha values they contribute are unpredictable.
+            The region specified within the DWM_BLURBEHIND structure is owned by the caller. It is the caller's responsibility to free the region, and they can do so as soon as the function call is completed.
+            This function can only be called on top-level windows. An error occurs when this function is called on other window types.
+            This function must be called whenver Desktop Window Manager (DWM) composition is toggled. Handle the WM_DWMCOMPOSITIONCHANGED message for composition change notification.
+            </remarks>
+        </member>
+        <member name="M:BreakerDev.DwmApi.Dwm.DwmExtendFrameIntoClientArea(System.IntPtr,BreakerDev.DwmApi.Dwm.MARGINS)">
+            <summary>
+            Extends the window frame into the client area.
+            </summary>
+            <param name="hWnd">The handle to the window in which the frame will be extended into the client area.</param>
+            <param name="pMargins">A pointer to a MARGINS structure that describes the margins to use when extending the frame into the client area.</param>
+            <remarks>
+            This function must be called whenever Desktop Window Manager (DWM) composition is toggled. Handle the WM_DWMCOMPOSITIONCHANGED message for composition change notification.
+            Use negative margin values to create the "sheet of glass" effect where the client area is rendered as a solid surface with no window border.
+            </remarks>
+        </member>
+        <member name="M:BreakerDev.DwmApi.Dwm.DwmIsCompositionEnabled(System.Boolean@)">
+            <summary>
+            Applies to: desktop apps only
+            Obtains a value that indicates whether Desktop Window Manager (DWM) composition is enabled. Applications can listen for composition state changes by handling the WM_DWMCOMPOSITIONCHANGED notification.
+            </summary>
+            <param name="Enabled">A pointer to a value that, when this function returns successfully, receives TRUE if DWM composition is enabled; otherwise, FALSE.</param>
+            <returns>If this function succeeds, it returns true. Otherwise, it returns false.</returns>
+        </member>
+        <member name="M:BreakerDev.DwmApi.Dwm.DwmEnableComposition(System.Boolean)">
+            <summary>
+            Applies to: desktop apps only
+            Enables or disables Desktop Window Manager (DWM) composition.
+            Note  This function is deprecated as of Windows 8 Consumer Preview. DWM can no longer be programmatically disabled.
+            </summary>
+            <param name="bEnable">true to enable DWM composition; false to disable composition. </param>
+        </member>
+        <member name="M:BreakerDev.DwmApi.Dwm.DwmGetColorizationColor(System.UInt32@,System.Boolean@)">
+            <summary>
+            Applies to: desktop apps only
+            Retrieves the current color used for Desktop Window Manager (DWM) glass composition. This value is based on the current color scheme and can be modified by the user. Applications can listen for color changes by handling the WM_DWMCOLORIZATIONCOLORCHANGED notification.
+            </summary>
+            <param name="pcrColorization">A pointer to a value that, when this function returns successfully, receives the current color used for glass composition. The color format of the value is 0xAARRGGBB.</param>
+            <param name="pfOpaqueBlend">A pointer to a value that, when this function returns successfully, indicates whether the color is an opaque blend. TRUE if the color is an opaque blend; otherwise, FALSE.</param>
+        </member>
+        <member name="M:BreakerDev.DwmApi.Dwm.DwmRegisterThumbnail(System.IntPtr,System.IntPtr)">
+            <summary>
+            Creates a Desktop Window Manager (DWM) thumbnail relationship between the destination and source windows.
+            </summary>
+            <param name="dest">The handle to the window that will use the DWM thumbnail. Setting the destination window handle to anything other than a top-level window type will result in a return value of E_INVALIDARG.</param>
+            <param name="source">The handle to the window to use as the thumbnail source. Setting the source window handle to anything other than a top-level window type will result in a return value of E_INVALIDARG.</param>
+            <returns>If this function succeeds, it returns the Thumbnail. Otherwise, it returns an Empty Handle.</returns>
+        </member>
+        <member name="M:BreakerDev.DwmApi.Dwm.DwmUnregisterThumbnail(System.IntPtr)">
+            <summary>
+            Removes a Desktop Window Manager (DWM) thumbnail relationship created by the DwmRegisterThumbnail function.
+            </summary>
+            <param name="hThumbnail">The handle to the thumbnail relationship to be removed. Null or non-existent handles will result in a return value of E_INVALIDARG.</param>
+        </member>
+        <member name="M:BreakerDev.DwmApi.Dwm.DwmUpdateThumbnailProperties(System.IntPtr,BreakerDev.DwmApi.Dwm.DWM_THUMBNAIL_PROPERTIES)">
+            <summary>
+            Updates the properties for a Desktop Window Manager (DWM) thumbnail.
+            </summary>
+            <param name="hThumbnail">The handle to the DWM thumbnail to be updated. Null or invalid thumbnails, as well as thumbnails owned by other processes will result in a return value of E_INVALIDARG.</param>
+            <param name="props">A pointer to a <see cref="T:BreakerDev.DwmApi.Dwm.DWM_THUMBNAIL_PROPERTIES"/> structure that contains the new thumbnail properties.</param>
+        </member>
+        <member name="M:BreakerDev.DwmApi.Dwm.DwmQueryThumbnailSourceSize(System.IntPtr,System.Drawing.Size@)">
+            <summary>
+            Retrieves the source size of the Desktop Window Manager (DWM) thumbnail.
+            </summary>
+            <param name="hThumbnail">A handle to the thumbnail to retrieve the source window size from.</param>
+            <param name="size">A pointer to a <see cref="T:System.Drawing.Size"/> structure that, when this function returns successfully, receives the size of the source thumbnail.</param>
+        </member>
+        <member name="T:BreakerDev.DwmApi.Dwm.DWM_THUMBNAIL_PROPERTIES">
+            <summary>
+            Specifies Desktop Window Manager (DWM) thumbnail properties. Used by the DwmUpdateThumbnailProperties function.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.DwmApi.Dwm.DWM_THUMBNAIL_PROPERTIES.dwFlags">
+            <summary>
+            A bitwise combination of DWM thumbnail constant values that indicates which members of this structure are set.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.DwmApi.Dwm.DWM_THUMBNAIL_PROPERTIES.rcDestination">
+            <summary>
+            The area in the destination window where the thumbnail will be rendered.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.DwmApi.Dwm.DWM_THUMBNAIL_PROPERTIES.rcSource">
+            <summary>
+            The region of the source window to use as the thumbnail. By default, the entire window is used as the thumbnail.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.DwmApi.Dwm.DWM_THUMBNAIL_PROPERTIES.opacity">
+            <summary>
+            The opacity with which to render the thumbnail. 0 is fully transparent while 255 is fully opaque. The default value is 255.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.DwmApi.Dwm.DWM_THUMBNAIL_PROPERTIES.fVisible">
+            <summary>
+            RUE to make the thumbnail visible; otherwise, FALSE. The default is FALSE.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.DwmApi.Dwm.DWM_THUMBNAIL_PROPERTIES.fSourceClientAreaOnly">
+            <summary>
+            TRUE to use only the thumbnail source's client area; otherwise, FALSE. The default is FALSE.
+            </summary>
+        </member>
+        <member name="T:BreakerDev.DwmApi.Dwm.MARGINS">
+            <summary>
+            The Margins Structure
+            </summary>
+        </member>
+        <member name="F:BreakerDev.DwmApi.Dwm.MARGINS.cxLeftWidth">
+            <summary>
+            The Margins for the Selected Client
+            </summary>
+        </member>
+        <member name="F:BreakerDev.DwmApi.Dwm.MARGINS.cxRightWidth">
+            <summary>
+            The Margins for the Selected Client
+            </summary>
+        </member>
+        <member name="F:BreakerDev.DwmApi.Dwm.MARGINS.cyTopHeight">
+            <summary>
+            The Margins for the Selected Client
+            </summary>
+        </member>
+        <member name="F:BreakerDev.DwmApi.Dwm.MARGINS.cyBottomHeight">
+            <summary>
+            The Margins for the Selected Client
+            </summary>
+        </member>
+        <member name="M:BreakerDev.DwmApi.Dwm.MARGINS.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Public Declaration of the MARGINS Structure
+            </summary>
+            <param name="left">Left</param>
+            <param name="top">Top</param>
+            <param name="right">Right</param>
+            <param name="bottom">Bottom</param>
+        </member>
+        <member name="T:BreakerDev.DwmApi.Dwm.DWM_BLURBEHIND">
+            <summary>
+            Specifies Desktop Window Manager (DWM) blur-behind properties. Used by the DwmEnableBlurBehindWindow function.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.DwmApi.Dwm.DWM_BLURBEHIND.dwFlags">
+            <summary>
+            A bitwise combination of DWM Blur Behind constant values that indicates which of the members of this structure have been set.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.DwmApi.Dwm.DWM_BLURBEHIND.fEnable">
+            <summary>
+                TRUE to register the window handle to DWM blur behind; FALSE to unregister the window handle from DWM blur behind.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.DwmApi.Dwm.DWM_BLURBEHIND.hRegionBlur">
+            <summary>
+            The region within the client area where the blur behind will be applied. A NULL value will apply the blur behind the entire client area.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.DwmApi.Dwm.DWM_BLURBEHIND.fTransitionOnMaximized">
+            <summary>
+            TRUE if the window's colorization should transition to match the maximized windows; otherwise, FALSE.
+            </summary>
+        </member>
+        <member name="T:BreakerDev.DwmApi.Dwm.RECT">
+            <summary>
+            The RECT structure defines the coordinates of the upper-left and lower-right corners of a rectangle.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.DwmApi.Dwm.RECT.left">
+            <summary>
+            Rectangle Specifications
+            </summary>
+        </member>
+        <member name="F:BreakerDev.DwmApi.Dwm.RECT.top">
+            <summary>
+            Rectangle Specifications
+            </summary>
+        </member>
+        <member name="F:BreakerDev.DwmApi.Dwm.RECT.right">
+            <summary>
+            Rectangle Specifications
+            </summary>
+        </member>
+        <member name="F:BreakerDev.DwmApi.Dwm.RECT.bottom">
+            <summary>
+            Rectangle Specifications
+            </summary>
+        </member>
+        <member name="M:BreakerDev.DwmApi.Dwm.RECT.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Public Declaration of the RECT Structure
+            </summary>
+            <param name="left">Left</param>
+            <param name="top">Top</param>
+            <param name="right">Right</param>
+            <param name="bottom">Bottom</param>
+        </member>
+        <member name="T:BreakerDev.Imports32.MessageBoxOptions">
+            <summary>
+            Flags that define appearance and behaviour of a standard message box displayed by a call to the MessageBox function.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.Ok">
+            <summary>
+            OK Button
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.OkCancel">
+            <summary>
+            OK and Cancel Buttons
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.AbortRetryIgnore">
+            <summary>
+            Abort, Retry, and Ignore Buttons
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.YesNoCancel">
+            <summary>
+            Yes, No, and Cancel Buttons
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.YesNo">
+            <summary>
+            Yes and No Buttons
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.RetryCancel">
+            <summary>
+            Retry and Cancel Buttons
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.CancelTryContinue">
+            <summary>
+            Cancel, Try, and Continue Buttons
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.IconHand">
+            <summary>
+            STOP
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.IconQuestion">
+            <summary>
+            Question
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.IconExclamation">
+            <summary>
+            Exclamation
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.IconAsterisk">
+            <summary>
+            Information
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.UserIcon">
+            <summary>
+            User Defined
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.IconWarning">
+            <summary>
+            Warning
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.IconError">
+            <summary>
+            Error
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.IconInformation">
+            <summary>
+            Information
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.IconStop">
+            <summary>
+            STOP
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.DefButton1">
+            <summary>
+            Default Button 1
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.DefButton2">
+            <summary>
+            Default Button 2
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.DefButton3">
+            <summary>
+            Default Button 3
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.DefButton4">
+            <summary>
+            Default Button 4
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.ApplicationModal">
+            <summary>
+            Application Modal Dialog
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.SystemModal">
+            <summary>
+            System Modal Dialog
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.TaskModal">
+            <summary>
+            Task Modal Dialog
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.Help">
+            <summary>
+            Help Button
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.NoFocus">
+            <summary>
+            No Focus
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.SetForeground">
+            <summary>
+            Set Forefround
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.DefaultDesktopOnly">
+            <summary>
+            Default Desktop Only
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.Topmost">
+            <summary>
+            Topmost Dialog
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.Right">
+            <summary>
+            Right Hand side
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxOptions.RTLReading">
+            <summary>
+            Right to Left Reading
+            </summary>
+        </member>
+        <member name="T:BreakerDev.Imports32.MessageBoxResult">
+            <summary>
+            Represents possible values returned by the MessageBox function.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxResult.Ok">
+            <summary>
+            Returns OK
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxResult.Cancel">
+            <summary>
+            Returns Cancel
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxResult.Abort">
+            <summary>
+            Returns Abort
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxResult.Retry">
+            <summary>
+            Returns Retry
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxResult.Ignore">
+            <summary>
+            Returns Ignore
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxResult.Yes">
+            <summary>
+            Returns Yes
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxResult.No">
+            <summary>
+            Returns No
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxResult.Close">
+            <summary>
+            Returns Close
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxResult.Help">
+            <summary>
+            Returns Help
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxResult.TryAgain">
+            <summary>
+            Returns Try Again
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxResult.Continue">
+            <summary>
+            Returns Continue
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.MessageBoxResult.Timeout">
+            <summary>
+            The Timeout in Milliseconds. Default is 32,000
+            </summary>
+        </member>
+        <member name="T:BreakerDev.Imports32.FlashFlags">
+            <summary>
+            The Flags for FLASHWINFO
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.FlashFlags.FLASHW_STOP">
+            <summary>
+            Stop flashing. The system restores the window to its original state.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.FlashFlags.FLASHW_CAPTION">
+            <summary>
+            Flash the window caption.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.FlashFlags.FLASHW_TRAY">
+            <summary>
+            Flash the taskbar button.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.FlashFlags.FLASHW_ALL">
+            <summary>
+            Flash both the window caption and taskbar button. This is equivalent to setting the FLASHW_CAPTION | FLASHW_TRAY flags.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.FlashFlags.FLASHW_TIMER">
+            <summary>
+            Flash continuously, until the FLASHW_STOP flag is set.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.FlashFlags.FLASHW_TIMERNOFG">
+            <summary>
+            Flash continuously until the window comes to the foreground.
+            </summary>
+        </member>
+        <member name="T:BreakerDev.Imports32.WindowMemoryIndex">
+            <summary>
+            Window Memory Index
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.WindowMemoryIndex.GWL_EXSTYLE">
+            <summary>
+            Retrieves the extended window styles.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.WindowMemoryIndex.GWL_HINSTANCE">
+            <summary>
+            Retrieves a handle to the application instance.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.WindowMemoryIndex.GWL_HWNDPARENT">
+            <summary>
+            Retrieves a handle to the parent window, if any.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.WindowMemoryIndex.GWL_ID">
+            <summary>
+            Retrieves the identifier of the window.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.WindowMemoryIndex.GWL_STYLE">
+            <summary>
+            Retrieves the window styles.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.WindowMemoryIndex.GWL_USERDATA">
+            <summary>
+            Retrieves the user data associated with the window. This data is intended for use by the application that created the window. Its value is initially zero.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.WindowMemoryIndex.GWL_WNDPROC">
+            <summary>
+            Retrieves the address of the window procedure, or a handle representing the address of the window procedure. You must use the CallWindowProc function to call the window procedure.
+            </summary>
+        </member>
+        <member name="T:BreakerDev.Imports32.ShutdownReason">
+            <summary>
+            Shutdown Reason Codes
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MajorApplication">
+            <summary>
+            Application issue.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MajorHardware">
+            <summary>
+            Hardware issue
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MajorLegacyApi">
+            <summary>
+            The InitiateSystemShutdown function was used instead of InitiateSystemShutdownEx.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MajorOperatingSystem">
+            <summary>
+            Operating System issue
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MajorOther">
+            <summary>
+            Other issue
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MajorPower">
+            <summary>
+            Power failure
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MajorSoftware">
+            <summary>
+            Software issue
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MajorSystem">
+            <summary>
+            System failure
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorBlueScreen">
+            <summary>
+            Blue screen crash event
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorCordUnplugged">
+            <summary>
+            Unplugged
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorDisk">
+            <summary>
+            Disk
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorEnvironment">
+            <summary>
+            Environment
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorHardwareDriver">
+            <summary>
+            Driver
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorHotfix">
+            <summary>
+            Hot fix
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorHotfixUninstall">
+            <summary>
+            Hot fix uninstallation
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorHung">
+            <summary>
+            Unresponsive
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorInstallation">
+            <summary>
+            Installation
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorMaintenance">
+            <summary>
+            Maintenance
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorMMC">
+            <summary>
+            MMC issue
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorNetworkConnectivity">
+            <summary>
+            Network connectivity
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorNetworkCard">
+            <summary>
+            Network card
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorOther">
+            <summary>
+            Other issue
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorOtherDriver">
+            <summary>
+            Other driver event
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorPowerSupply">
+            <summary>
+            Power supply
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorProcessor">
+            <summary>
+            Processor
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorReconfig">
+            <summary>
+            Reconfigure
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorSecurity">
+            <summary>
+            Security issue
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorSecurityFix">
+            <summary>
+            Security patch
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorSecurityFixUninstall">
+            <summary>
+            Security patch uninstallation
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorServicePack">
+            <summary>
+            Service pack
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorServicePackUninstall">
+            <summary>
+            Service pack uninstallation
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorTermSrv">
+            <summary>
+            Terminal Services
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorUnstable">
+            <summary>
+            Unstable
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorUpgrade">
+            <summary>
+            Upgrade
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.MinorWMI">
+            <summary>
+            WMI issue
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.FlagUserDefined">
+            <summary>
+            The reason code is defined by the user. For more information.
+            If this flag is not present, the reason code is defined by the system.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ShutdownReason.FlagPlanned">
+            <summary>
+            The shutdown was planned. The system generates a System State Data (SSD) file. This file contains system state information such as the processes, threads, memory usage, and configuration.
+            If this flag is not present, the shutdown was unplanned. Notification and reporting options are controlled by a set of policies. For example, after logging in, the system displays a dialog box reporting the unplanned shutdown if the policy has been enabled. An SSD file is created only if the SSD policy is enabled on the system. The administrator can use Windows Error Reporting to send the SSD data to a central location, or to Microsoft.
+            </summary>
+        </member>
+        <member name="T:BreakerDev.Imports32.ACCESS_MASK">
+            <summary>
+            A DWORD value that defines standard, specific, and generic rights. These rights are used in access control entries (ACEs) and are the primary means of specifying the requested or granted access to an object.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ACCESS_MASK.DELETE">
+            <summary>
+            Delete access
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ACCESS_MASK.READ_CONTROL">
+            <summary>
+            Read access to the owner, group, and discretionary access control list (DACL) of the security descriptor.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ACCESS_MASK.WRITE_DAC">
+            <summary>
+            Write access to the DACL.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ACCESS_MASK.WRITE_OWNER">
+            <summary>
+            Write access to owner.
+            </summary>
+        </member>
+        <member name="F:BreakerDev.Imports32.ACCESS_MASK.SYNCHRONIZE">
+            <summary>
+            Synchronize access.
+            </summary>
+        </member>
+        <member name="T:BreakerDev.Win32ErrorCodes.WindowsErrorCodes">
+            <summary>
+            The Windows Error Codes Dictionary
+            </summary>
+        </member>
+        <member name="M:BreakerDev.Win32ErrorCodes.WindowsErrorCodes.GetError(System.Int32)">
+            <summary>
+            Gets Returns the String of the Error code Number
+            </summary>
+            <param name="ERR">The Error Code to look up</param>
+            <returns>The string of the Error Code</returns>
+        </member>
+        <member name="F:BreakerDev.ExternalHandles.Handles.hDesktop">
+            <summary>
+            The Desktop Screen
+            </summary>
+        </member>
+        <member name="F:BreakerDev.ExternalHandles.Handles.hDesktopWin8">
+            <summary>
+            Windows 8 Desktop Screen
+            </summary>
+        </member>
+        <member name="F:BreakerDev.ExternalHandles.Handles.hTray">
+            <summary>
+            The Taskbar
+            </summary>
+        </member>
+        <member name="F:BreakerDev.ExternalHandles.Handles.hTrayNotify">
+            <summary>
+            The Notification Tray
+            </summary>
+        </member>
+        <member name="F:BreakerDev.ExternalHandles.Handles.hReBar">
+            <summary>
+            The Taskbar Rebar
+            </summary>
+        </member>
+        <member name="F:BreakerDev.ExternalHandles.Handles.hTask">
+            <summary>
+            The Launch Tray
+            </summary>
+        </member>
+        <member name="F:BreakerDev.ExternalHandles.Handles.hToolbar">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:BreakerDev.GUI.Dialog">
+            <summary>
+            A Blank Dialog
+            </summary>
+        </member>
+        <member name="M:BreakerDev.GUI.Dialog.#ctor">
+            <summary>
+            Creates a new blank Dialog
+            </summary>
+        </member>
+        <member name="T:BreakerDev.Network.NetworkAPI">
+            <summary>
+            Provides a mechanism for supplying
+            a list of all PC names in the local network.
+            This collection of PC names is used in the form 
+            
+            This class makes use of a DllImport instruction.
+            The purpose of which is as follows:
+            When a DllImport declaration is made
+            in managed code (C#) it is a call to a legacy
+            unmanaged code module, normally
+            a C++ Dynamic Link Library. These C++ Dll's are
+            usually part of the operating system API,
+            or some other vendors API, and must be 
+            used to carry out operations that are not
+            native within the managed code C# framework. 
+            This is fairly normal within the windows world.
+            The only thing that needs careful consideration
+            is the construction of the correct type of STRUCTS,
+            object pointers, and attribute markers,
+            which all contribute to making the link
+            between managed (C#) and unmanaged code (C++)
+            more seamless
+            
+            This class makes use of the following Dll calls
+            <list type="bullet">
+            <item>
+            <description> Netapi32.dll : NetServerEnum,
+            The NetServerEnum function lists all servers
+            of the specified type that are visible in
+            a domain. For example, an application can call 
+            NetServerEnum to list all domain controllers
+            only or all SQL servers only.
+            You can combine bit masks to list several
+            types. For example, a value of 0x00000003 
+            combines the bit masks for SV_TYPE_WORKSTATION
+            (0x00000001) and SV_TYPE_SERVER (0x00000002).
+            </description>
+            </item>
+            <item>
+            <description> Netapi32.dll : NetApiBufferFree,
+            The NetApiBufferFree function frees 
+            the memory that the NetApiBufferAllocate
+            function allocates. Call NetApiBufferFree 
+            to free the memory that other network
+            management functions return.</description>
+            </item>
+            </list>
+            </summary>
+        </member>
+        <member name="M:BreakerDev.Network.NetworkAPI.NetServerEnum(System.String,System.Int32,System.IntPtr@,System.Int32,System.Int32@,System.Int32@,System.Int32,System.String,System.Int32@)">
+            <summary>
+            Netapi32.dll : The NetServerEnum function lists all servers
+            of the specified type that are
+            visible in a domain. For example, an 
+            application can call NetServerEnum
+            to list all domain controllers only
+            or all SQL servers only.
+            You can combine bit masks to list
+            several types. For example, a value 
+            of 0x00000003  combines the bit
+            masks for SV_TYPE_WORKSTATION 
+            (0x00000001) and SV_TYPE_SERVER (0x00000002)
+            </summary>
+            <param name="ServerName">Reserved; must be NULL.</param>
+            <param name="dwLevel">The information level of the data requested.</param>
+            <param name="pBuf">A pointer to the buffer that receives the data.</param>
+            <param name="dwPrefMaxLen">The preferred maximum length of returned data, in bytes.</param>
+            <param name="dwEntriesRead">A pointer to a value that receives the count of elements actually enumerated.</param>
+            <param name="dwTotalEntries">A pointer to a value that receives the total number of visible servers and workstations on the network.</param>
+            <param name="dwServerType">A value that filters the server entries to return from the enumeration.</param>
+            <param name="domain">A pointer to a constant string that specifies the name of the domain for which a list of servers is to be returned. If this parameter is NULL, the primary domain is implied.</param>
+            <param name="dwResumeHandle">Reserved; must be set to zero.</param>
+            <returns>If the function succeeds, the return value is NERR_Success.</returns>
+        </member>
+        <member name="M:BreakerDev.Network.NetworkAPI.NetApiBufferFree(System.IntPtr)">
+            <summary>
+            Netapi32.dll : The NetApiBufferFree function frees 
+            the memory that the NetApiBufferAllocate function allocates. 
+            Call NetApiBufferFree to free
+            the memory that other network 
+            management functions return.
+            </summary>
+        </member>
+        <member name="M:BreakerDev.Network.NetworkAPI.#ctor(System.Windows.Forms.Form)">
+            <SUMMARY>
+            Constructor, simply creates a new NetworkBrowser object
+            </SUMMARY>
+        </member>
+        <member name="M:BreakerDev.Network.NetworkAPI.getNetworkComputers">
+            <summary>
+            Uses the DllImport : NetServerEnum
+            with all its required parameters
+            (see http://msdn.microsoft.com/library/default.asp?
+                 url=/library/en-us/netmgmt/netmgmt/netserverenum.asp
+            for full details or method signature) to
+            retrieve a list of domain SV_TYPE_WORKSTATION
+            and SV_TYPE_SERVER PC's
+            </summary>
+            <returns>Arraylist that represents
+            all the SV_TYPE_WORKSTATION and SV_TYPE_SERVER
+            PC's in the Domain</returns>
+        </member>
+        <member name="M:BreakerDev.Network.NetworkAPI.getConnectedComputers">
+            <summary>
+            Gets the connected computers from witin your Area
+            </summary>
+            <returns>Connected computers in your Local Network</returns>
+        </member>
+        <member name="T:BreakerDev.Network.NetworkAPI._SERVER_INFO_100">
+            <summary>
+            create a _SERVER_INFO_100 STRUCTURE
+            </summary>
+        </member>
+        <member name="T:BreakerDev.PastebinAPI">
+            <summary>
+            APIforPasteBin
+            </summary>
+        </member>
+        <member name="M:BreakerDev.PastebinAPI.GetInfo(System.Enum)">
+            <summary>
+            Gets the Description Context from the selected Enum
+            </summary>
+            <param name="value">The Selected Enum to get the Selected Description</param>
+            <returns>If Success, will return the Description of the selected Enum. If Fail, it returns value.ToString().</returns>
+        </member>
+        <member name="M:BreakerDev.PastebinAPI.Login(System.String,System.String,System.String,System.String@)">
+            <summary>
+            Logs into the Pastebin Service
+            </summary>
+            <param name="DevKey">Your Unique Developer Key</param>
+            <param name="UserName">Your Username</param>
+            <param name="Password">Your Password</param>
+            <param name="SessionKey">The User Session Key to use for your current Session</param>
+            <returns>If Successful, It will give the Session key to the User provided by out</returns>
+        </member>
+        <member name="M:BreakerDev.PastebinAPI.DownloadPaste(System.String)">
+            <summary>
+            Downloads a Raw Copy of the Specified URL
+            </summary>
+            <param name="Key">The Paste Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:BreakerDev.PastebinAPI.Post(System.String,BreakerDev.PastebinAPI.Pastebin_Formats,BreakerDev.PastebinAPI.Pastebin_Privacy,BreakerDev.PastebinAPI.Pastebin_Expiration,System.String)">
+            <summary>
+            Posts a New Pastie to Pastebin
+            </summary>
+            <param name="DevKey">Your Unique Developer Key</param>
+            <param name="format">The Format of the Paste</param>
+            <param name="privacy">The Privacy of the Paste</param>
+            <param name="expiration">The Expiration Period</param>
+            <param name="PasteCode">Your Text or Code to paste</param>
+            <returns>If Successful, it will return the URL of the paste</returns>
+        </member>
+        <member name="M:BreakerDev.PastebinAPI.Post(System.String,System.String,BreakerDev.PastebinAPI.Pastebin_Formats,BreakerDev.PastebinAPI.Pastebin_Privacy,BreakerDev.PastebinAPI.Pastebin_Expiration,System.String)">
+            <summary>
+            Posts a New Pastie to Pastebin
+            </summary>
+            <param name="DevKey">Your Unique Developer Key</param>
+            <param name="UserKey">Your Unique Session Key</param>
+            <param name="format">The Format of the Paste</param>
+            <param name="privacy">The Privacy of the Paste</param>
+            <param name="expiration">The Expiration Period</param>
+            <param name="PasteCode">Your Text or Code to paste</param>
+            <returns>If Successful, it will return the URL of the paste</returns>
+        </member>
+        <member name="M:BreakerDev.PastebinAPI.Delete(System.String,System.String,System.String)">
+            <summary>
+            Posts a New Pastie to Pastebin
+            </summary>
+            <param name="DevKey">Your Unique Developer Key</param>
+            <param name="UserKey">Your Unique Session Key</param>
+            <param name="PasteKey">Your Text or Code to paste</param>
+            <returns>If Successful, it will return the URL of the paste</returns>
+        </member>
+        <member name="M:BreakerDev.PastebinAPI.ListPastes(System.String,System.String,System.Int32)">
+            <summary>
+            Gets Pastes set by the logged in User
+            </summary>
+            <param name="DevKey">Your Unique Developer Key</param>
+            <param name="UserKey"></param>
+            <param name="ResultsLimit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BreakerDev.PastebinAPI.ListTrendingPastes(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="DevKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BreakerDev.PastebinAPI.GetUserInfo(System.String,System.String)">
+            <summary>
+            Gets the User's Information
+            </summary>
+            <param name="DevKey">Your Unique Developer Key</param>
+            <param name="UserKey">Your Unique Session Key</param>
+            <returns>If Successful, It will return the Users Information</returns>
+        </member>
+        <member name="M:BreakerDev.PastebinAPI.GetTrendingInfo(System.String)">
+            <summary>
+            Gets an Array of the New Random Pastes from Pastebin
+            </summary>
+            <param name="DevKey">Your Unique Developer Key</param>
+            <returns>If Successful, returns an Array of Trending Pastes</returns>
+        </member>
+        <member name="M:BreakerDev.PastebinAPI.GetPersonalPastes(System.String)">
+            <summary>
+            Gets an Array of the New Random Pastes from Pastebin
+            </summary>
+            <param name="DevKey">Your Unique Developer Key</param>
+            <returns>If Successful, returns an Array of Trending Pastes</returns>
+        </member>
+        <member name="T:BreakerDev.PastebinAPI.Pastebin_Account">
+            <summary>
+            Pastebin Account Type
+            </summary>
+        </member>
+        <member name="T:BreakerDev.PastebinAPI.Pastebin_Formats">
+            <summary>
+            PasteBin Formats
+            </summary>
+        </member>
+        <member name="T:BreakerDev.PastebinAPI.Pastebin_Expiration">
+            <summary>
+            Pastebin Expiration
+            </summary>
+        </member>
+        <member name="T:BreakerDev.PastebinAPI.Pastebin_Privacy">
+            <summary>
+            Pastebin Privacy
+            </summary>
+        </member>
+        <member name="F:BreakerDev.PastebinAPI.Pastebin_Privacy.Public">
+            <summary>
+            Public - Everyone can see it!
+            </summary>
+        </member>
+        <member name="F:BreakerDev.PastebinAPI.Pastebin_Privacy.Unlisted">
+            <summary>
+            Unlisted - Anyone with the URL can view the Paste
+            </summary>
+        </member>
+        <member name="F:BreakerDev.PastebinAPI.Pastebin_Privacy.Private">
+            <summary>
+            Private - Only you can see it
+            </summary>
+        </member>
+        <member name="T:BreakerDev.WPF_Interop.WPF">
+            <summary>
+            WPF Hook Class
+            </summary>
+        </member>
+        <member name="T:BreakerDev.WPF_Interop.WPF.ABEdge">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.ABEdge.Left">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.ABEdge.Top">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.ABEdge.Right">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.ABEdge.Bottom">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.ABEdge.None">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:BreakerDev.WPF_Interop.WPF.AppBarFunctions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:BreakerDev.WPF_Interop.WPF.AppBarFunctions.SHAppBarMessage(System.Int32,BreakerDev.WPF_Interop.WPF.AppBarFunctions.APPBARDATA@)">
+            <summary>
+            
+            </summary>
+            <param name="dwMessage"></param>
+            <param name="pData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BreakerDev.WPF_Interop.WPF.AppBarFunctions.RegisterWindowMessage(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="msg"></param>
+            <returns></returns>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.s_RegisteredWindowInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:BreakerDev.WPF_Interop.WPF.AppBarFunctions.GetRegisterInfo(System.Windows.Window)">
+            <summary>
+            
+            </summary>
+            <param name="appbarWindow"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BreakerDev.WPF_Interop.WPF.AppBarFunctions.RestoreWindow(System.Windows.Window)">
+            <summary>
+            
+            </summary>
+            <param name="appbarWindow"></param>
+        </member>
+        <member name="M:BreakerDev.WPF_Interop.WPF.AppBarFunctions.SetAppBar(System.Windows.Window,BreakerDev.WPF_Interop.WPF.ABEdge)">
+            <summary>
+            
+            </summary>
+            <param name="appbarWindow"></param>
+            <param name="edge"></param>
+        </member>
+        <member name="M:BreakerDev.WPF_Interop.WPF.AppBarFunctions.DoResize(System.Windows.Window,System.Windows.Rect)">
+            <summary>
+            
+            </summary>
+            <param name="appbarWindow"></param>
+            <param name="rect"></param>
+        </member>
+        <member name="M:BreakerDev.WPF_Interop.WPF.AppBarFunctions.ABSetPos(BreakerDev.WPF_Interop.WPF.ABEdge,System.Windows.Window)">
+            <summary>
+            
+            </summary>
+            <param name="edge"></param>
+            <param name="appbarWindow"></param>
+        </member>
+        <member name="T:BreakerDev.WPF_Interop.WPF.AppBarFunctions.RECT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.RECT.left">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.RECT.top">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.RECT.right">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.RECT.bottom">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:BreakerDev.WPF_Interop.WPF.AppBarFunctions.APPBARDATA">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.APPBARDATA.cbSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.APPBARDATA.hWnd">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.APPBARDATA.uCallbackMessage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.APPBARDATA.uEdge">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.APPBARDATA.rc">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.APPBARDATA.lParam">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:BreakerDev.WPF_Interop.WPF.AppBarFunctions.ABMsg">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.ABMsg.ABM_NEW">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.ABMsg.ABM_REMOVE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.ABMsg.ABM_QUERYPOS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.ABMsg.ABM_SETPOS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.ABMsg.ABM_GETSTATE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.ABMsg.ABM_GETTASKBARPOS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.ABMsg.ABM_ACTIVATE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.ABMsg.ABM_GETAUTOHIDEBAR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.ABMsg.ABM_SETAUTOHIDEBAR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.ABMsg.ABM_WINDOWPOSCHANGED">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.ABMsg.ABM_SETSTATE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:BreakerDev.WPF_Interop.WPF.AppBarFunctions.ABNotify">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.ABNotify.ABN_STATECHANGE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.ABNotify.ABN_POSCHANGED">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.ABNotify.ABN_FULLSCREENAPP">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:BreakerDev.WPF_Interop.WPF.AppBarFunctions.ABNotify.ABN_WINDOWARRANGE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:BreakerDev.WPF_Interop.WPF.AppBarFunctions.RegisterInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:BreakerDev.WPF_Interop.WPF.AppBarFunctions.RegisterInfo.WndProc(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="hwnd"></param>
+            <param name="msg"></param>
+            <param name="wParam"></param>
+            <param name="lParam"></param>
+            <param name="handled"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BreakerDev.WPF_Interop.WPF.AppBarFunctions.RegisterInfo.CallbackId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:BreakerDev.WPF_Interop.WPF.AppBarFunctions.RegisterInfo.IsRegistered">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:BreakerDev.WPF_Interop.WPF.AppBarFunctions.RegisterInfo.Window">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:BreakerDev.WPF_Interop.WPF.AppBarFunctions.RegisterInfo.Edge">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:BreakerDev.WPF_Interop.WPF.AppBarFunctions.RegisterInfo.OriginalStyle">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:BreakerDev.WPF_Interop.WPF.AppBarFunctions.RegisterInfo.OriginalPosition">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:BreakerDev.WPF_Interop.WPF.AppBarFunctions.RegisterInfo.OriginalSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:BreakerDev.WPF_Interop.WPF.AppBarFunctions.RegisterInfo.OriginalResizeMode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:BreakerDev.WPF_Interop.WPF.AppBarFunctions.ResizeDelegate">
+            <summary>
+            
+            </summary>
+            <param name="appbarWindow"></param>
+            <param name="rect"></param>
+        </member>
+        <member name="T:BreakerDev.Imports32.Special">
+            <summary>
+            The Special Class
+            </summary>
+        </member>
+        <member name="M:BreakerDev.Imports32.Special.GetUserTilePath(System.String,System.UInt32,System.Text.StringBuilder,System.Int32)">
+            <summary>
+            Gets the UserTile Path
+            </summary>
+            <param name="username">The Username to get the UserTile Path for. Can be null</param>
+            <param name="flag">Must be 0x80000000</param>
+            <param name="picpath">The path it returns</param>
+            <param name="maxLength">The maximum length of the path</param>
+        </member>
+        <member name="M:BreakerDev.Imports32.Special.GetUserTilePath(System.String)">
+            <summary>
+            Gets the UserTile Path
+            </summary>
+            <param name="username">The Username to get the UserTile Path for. Can be null</param>
+            <returns>Returns the UserTile Path of Target</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Special.GetUserTile(System.String)">
+            <summary>
+            Gets the UserTile
+            </summary>
+            <param name="username">The Username to get the UserTile Path for. Can be null</param>
+            <returns>The UserTile of Target</returns>
+        </member>
+        <member name="M:BreakerDev.Imports32.Special.HidePassword">
+            <summary>
+            For Console Only - Masks the Text on screen, and returns the password.
+            </summary>
+            <returns>The Password</returns>
+        </member>
+        <member name="T:BreakerDev.Controls.VistaTextBox">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:BreakerDev.Controls.VistaTextBox.SendMessage(System.IntPtr,System.Int32,System.IntPtr,System.String)">
+            <summary>
+            Sends the specified message to a window or windows. The SendMessage function calls the window procedure for the specified window and does not return until the window procedure has processed the message.
+            </summary>
+            <param name="hWnd">A handle to the window whose window procedure will receive the message. If this parameter is HWND_BROADCAST ((HWND)0xffff), the message is sent to all top-level windows in the system, including disabled or invisible unowned windows, overlapped windows, and pop-up windows; but the message is not sent to child windows. Message sending is subject to UIPI. The thread of a process can send messages only to message queues of threads in processes of lesser or equal integrity level.</param>
+            <param name="Msg">The message to be sent.</param>
+            <param name="wParam">Additional message-specific information.</param>
+            <param name="lParam">Additional message-specific information.</param>
+            <returns></returns>
+        </member>
+        <member name="P:BreakerDev.Controls.VistaTextBox.CueText">
+            <summary>
+            The Handled background text of the TextBox
+            </summary>
+        </member>
+        <member name="T:BreakerDev.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:BreakerDev.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:BreakerDev.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:BreakerDev.Properties.Resources.BreakerDev_Dialog_Icon">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+    </members>
+</doc>
